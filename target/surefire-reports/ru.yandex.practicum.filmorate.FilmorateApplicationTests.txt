@@ -1,4 +1,4 @@
 -------------------------------------------------------------------------------
 Test set: ru.yandex.practicum.filmorate.FilmorateApplicationTests
 -------------------------------------------------------------------------------
-Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 3.744 s - in ru.yandex.practicum.filmorate.FilmorateApplicationTests
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 1.768 s - in ru.yandex.practicum.filmorate.FilmorateApplicationTests

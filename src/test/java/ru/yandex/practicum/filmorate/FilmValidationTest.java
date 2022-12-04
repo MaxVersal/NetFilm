@@ -1,4 +1,4 @@
-package java.ru.yandex.practicum.filmorate;
+package ru.yandex.practicum.filmorate;
 
 import com.google.gson.Gson;
 import org.junit.jupiter.api.Assertions;
