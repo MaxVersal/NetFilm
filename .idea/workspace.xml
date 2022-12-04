@@ -32,7 +32,7 @@
       <recent name="C:\Users\User\IdeaProjects\java-filmorate" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.UserValidationTest.shouldReturnFalse">
+  <component name="RunManager" selected="Application.FilmorateApplication">
     <configuration name="FilmorateApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="ru.yandex.practicum.filmorate.FilmorateApplication" />
       <module name="java-filmorate" />
@@ -80,9 +80,9 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.FilmorateApplication" />
         <item itemvalue="JUnit.UserValidationTest.shouldReturnFalse" />
         <item itemvalue="JUnit.UserValidationTest.shouldReturnTrue" />
-        <item itemvalue="Application.FilmorateApplication" />
       </list>
     </recent_temporary>
   </component>
