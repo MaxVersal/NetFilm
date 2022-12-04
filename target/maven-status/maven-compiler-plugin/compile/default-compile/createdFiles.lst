@@ -1,0 +1,6 @@
+ru\yandex\practicum\filmorate\model\User.class
+ru\yandex\practicum\filmorate\exceptions\ValidationException.class
+ru\yandex\practicum\filmorate\controller\UserController.class
+ru\yandex\practicum\filmorate\controller\FilmController.class
+ru\yandex\practicum\filmorate\FilmorateApplication.class
+ru\yandex\practicum\filmorate\model\Film.class
