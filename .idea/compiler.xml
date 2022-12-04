@@ -12,7 +12,7 @@
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="filmorate" target="17" />
-      <module name="java-filmorate" target="17" />
+      <module name="java-filmorate" target="11" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
