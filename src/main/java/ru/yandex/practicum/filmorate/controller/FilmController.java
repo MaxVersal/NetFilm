@@ -52,7 +52,7 @@ public class FilmController {
         return film;
     }
 
-    public boolean checkFilm(Film film) {
+    private boolean checkFilm(Film film) {
         if (film.getName().isEmpty()) {
             log.debug("Имя фильма пустое");
             return false;

@@ -53,7 +53,7 @@ public class UserController {
         return user;
     }
 
-    public boolean checkUser(User user) {
+    private boolean checkUser(User user) {
         if (user.getEmail().isEmpty() || user.getEmail().isBlank() || !user.getEmail().contains("@")) {
             log.debug("Неверное указан email пользователя");
             return false;

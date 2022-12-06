@@ -51,7 +51,22 @@
       <recent name="ru.yandex.practicum.filmorate.controller" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.UserControllerTest">
+  <component name="RunManager" selected="JUnit.FilmControllerTest">
+    <configuration name="FilmControllerTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="java-filmorate" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="ru.yandex.practicum.filmorate.controller.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="ru.yandex.practicum.filmorate.controller" />
+      <option name="MAIN_CLASS_NAME" value="ru.yandex.practicum.filmorate.controller.FilmControllerTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="FilmorateApplicationTests" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="java-filmorate" />
       <extension name="coverage">
@@ -63,22 +78,6 @@
       <option name="PACKAGE_NAME" value="ru.yandex.practicum.filmorate.controller" />
       <option name="MAIN_CLASS_NAME" value="ru.yandex.practicum.filmorate.controller.FilmorateApplicationTests" />
       <option name="TEST_OBJECT" value="class" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="FilmorateApplicationTests.shouldPostFilm" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="java-filmorate" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="ru.yandex.practicum.filmorate.controller.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="ru.yandex.practicum.filmorate.controller" />
-      <option name="MAIN_CLASS_NAME" value="ru.yandex.practicum.filmorate.controller.FilmorateApplicationTests" />
-      <option name="METHOD_NAME" value="shouldPostFilm" />
-      <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -132,11 +131,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.FilmControllerTest" />
         <item itemvalue="JUnit.UserControllerTest" />
         <item itemvalue="JUnit.UserControllerTest.shouldPutUser" />
         <item itemvalue="JUnit.FilmorateApplicationTests" />
         <item itemvalue="JUnit.FilmorateApplicationTests.shouldPutFilm" />
-        <item itemvalue="JUnit.FilmorateApplicationTests.shouldPostFilm" />
       </list>
     </recent_temporary>
   </component>
