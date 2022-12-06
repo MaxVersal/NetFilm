@@ -6,7 +6,6 @@ import org.springframework.web.bind.annotation.*;
 import ru.yandex.practicum.filmorate.exceptions.ValidationException;
 import ru.yandex.practicum.filmorate.model.Film;
 
-import java.awt.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -22,11 +21,7 @@ public class FilmController {
 
     @GetMapping
     public List<Film> getFilms() {
-        List<Film> filmsList = new ArrayList<>();
-        for (Film film : films.values()) {
-            filmsList.add(film);
-        }
-        return filmsList;
+        return new ArrayList<>(films.values());
     }
 
     @PostMapping
@@ -49,7 +44,7 @@ public class FilmController {
                 log.debug("Обновлен фильм: {}", film);
                 films.put(film.getId(), film);
             } else {
-                throw new ValidationException("Проверьте правильность введенных данных");
+                throw new ValidationException("Проверьте корректность введенных данных");
             }
         } else {
             throw new ValidationException("Проверьте корректность введенных данных!");
@@ -64,7 +59,7 @@ public class FilmController {
         } else if (film.getDescription().length() > 200) {
             log.debug("Слишком длинное описание");
             return false;
-        } else if (film.getReleaseDate().isBefore(LocalDate.of(1895, 01, 28))) {
+        } else if (film.getReleaseDate().isBefore(LocalDate.of(1895, 1, 28))) {
             log.debug("Некорректная дата фильма");
             return false;
         } else if (film.getDuration() < 0) {

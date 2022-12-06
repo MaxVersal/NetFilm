@@ -20,11 +20,7 @@ public class UserController {
 
     @GetMapping
     public List< User> getUsers() {
-        List<User> us = new ArrayList<>();
-        for (User user : users.values()) {
-            us.add(user);
-        }
-        return us;
+        return new ArrayList<>(users.values());
     }
 
     @PostMapping
@@ -61,7 +57,7 @@ public class UserController {
         if (user.getEmail().isEmpty() || user.getEmail().isBlank() || !user.getEmail().contains("@")) {
             log.debug("Неверное указан email пользователя");
             return false;
-        } else if (user.getLogin().contains(" ") || user.getLogin().isEmpty() || user.getLogin().isEmpty()) {
+        } else if (user.getLogin().contains(" ") || user.getLogin().isEmpty()) {
             log.debug("Неверный логин");
             return false;
         } else if (user.getBirthday().isAfter(LocalDate.now())) {
