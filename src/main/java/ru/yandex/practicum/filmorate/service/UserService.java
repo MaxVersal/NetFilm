@@ -1,5 +1,6 @@
 package ru.yandex.practicum.filmorate.service;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import ru.yandex.practicum.filmorate.exceptions.UserNotFoundException;
 import ru.yandex.practicum.filmorate.exceptions.ValidationException;
@@ -10,6 +11,7 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
+@Slf4j
 public class UserService {
 
     private final InMemoryUserStorage userStorage;
@@ -18,7 +20,7 @@ public class UserService {
         this.userStorage = userStorage;
     }
 
-    public User addFriend(int mainUserId, int addedUserId) throws UserNotFoundException {
+    public String addFriend(int mainUserId, int addedUserId) throws UserNotFoundException {
         userStorage
                 .getUserById(mainUserId)
                 .getFriends()
@@ -27,38 +29,37 @@ public class UserService {
                 .getUserById(addedUserId)
                 .getFriends()
                 .add(userStorage.getUserById(mainUserId).getId());
-        return userStorage.getUserById(addedUserId);
+        return String.format("Пользователь %s и %s теперь друзья", userStorage.getUserById(mainUserId).getName(),
+                                                                    userStorage.getUserById(addedUserId).getName());
+
     }
 
-    public User deleteFriend(int mainUserID, int deletedUserId) throws UserNotFoundException {
+    public String deleteFriend(int mainUserID, int deletedUserId) throws UserNotFoundException {
         userStorage.getUserById(mainUserID)
                 .getFriends()
                 .remove(deletedUserId);
         userStorage.getUserById(deletedUserId)
                 .getFriends()
                 .remove(mainUserID);
-        return userStorage.getUserById(deletedUserId);
+        return String.format("Пользователи %s и %s больше не друзья", userStorage.getUserById(mainUserID).getName(),
+                                                                        userStorage.getUserById(deletedUserId).getName());
     }
 
-    public Set<User> getFriends(int mainUserId) throws UserNotFoundException {
+    public List<User> getFriends(int mainUserId) throws UserNotFoundException {
         Set<Integer> friends = userStorage.getUserById(mainUserId).getFriends();
-        Set<User> friendsViewable = new HashSet<>();
-        for (Integer integer : friends) {
-            friendsViewable.add(userStorage.getUserById(integer));
-        }
-        return friendsViewable.stream()
-                .sorted(Comparator.comparingInt(User::getId))
-                .collect(Collectors.toCollection(LinkedHashSet::new));
+        return friends.stream()
+                .map(userId -> userStorage.getUserById(userId))
+                .sorted(Comparator.comparing(User::getId))
+                .collect(Collectors.toList());
     }
 
-    public Set<User> findGeneralFriends(int mainId, int otherId) throws UserNotFoundException {
+    public Set<User> getCommonFriends(int mainId, int otherId) throws UserNotFoundException {
         Set<Integer> common = new HashSet<>(userStorage.getUserById(mainId).getFriends());
         common.retainAll(userStorage.getUserById(otherId).getFriends());
-        Set<User> friendsViewable = new HashSet<>();
-        for (Integer integer : common) {
-            friendsViewable.add(userStorage.getUserById(integer));
-        }
-        return friendsViewable;
+        return common.stream()
+                .map(userID -> userStorage.getUserById(userID))
+                .sorted(Comparator.comparing(User::getId))
+                .collect(Collectors.toCollection(LinkedHashSet::new));
     }
 
     public User addUser(User user) throws ValidationException {
@@ -73,7 +74,7 @@ public class UserService {
         return userStorage.getUsers();
     }
 
-    public User searchUserById(int id) throws UserNotFoundException {
+    public User getUserById(int id) throws UserNotFoundException {
         return userStorage.getUserById(id);
     }
 }

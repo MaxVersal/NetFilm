@@ -46,11 +46,10 @@ public class FilmService {
         return filmStorage.findFilmById(filmId).getLikes();
     }
 
-    public List<Film> popularFilms(String count) {
-        int count1 = Integer.parseInt(count);
+    public List<Film> popularFilms(Integer count) {
         return filmStorage.getFilms().stream()
                 .sorted((f1, f2) -> f2.getLikes().size() - f1.getLikes().size())
-                .limit(count1)
+                .limit(count)
                 .collect(Collectors.toList());
     }
 

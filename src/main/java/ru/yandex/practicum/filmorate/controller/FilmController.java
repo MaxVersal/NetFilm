@@ -13,7 +13,7 @@ import ru.yandex.practicum.filmorate.service.FilmService;
 import java.util.List;
 
 @RestController
-@RequestMapping
+@RequestMapping("/films")
 @Slf4j
 public class FilmController {
 
@@ -24,38 +24,38 @@ public class FilmController {
         this.filmService = filmService;
     }
 
-    @GetMapping("/films")
+    @GetMapping
     public List<Film> getFilms() {
         return filmService.getAllFilms();
     }
 
-    @PostMapping("/films")
+    @PostMapping
     public Film addFilm(@RequestBody Film film) throws ValidationException {
         return filmService.addFilm(film);
     }
 
-    @PutMapping("/films")
+    @PutMapping
     public Film updateFilm(@RequestBody Film film) throws ValidationException {
         return filmService.updateFilm(film);
     }
 
-    @PutMapping("/films/{id}/like/{userId}")
-    public Film pressLike(@PathVariable int id,@PathVariable int userId) throws FilmNotFoundException, UserNotFoundException {
+    @PutMapping("/{id}/like/{userId}")
+    public Film addLike(@PathVariable int id,@PathVariable int userId) throws FilmNotFoundException, UserNotFoundException {
         return filmService.addLike(id, userId);
     }
 
-    @DeleteMapping("/films/{id}/like/{userId}")
+    @DeleteMapping("/{id}/like/{userId}")
     public Film deleteLike(@PathVariable int id, @PathVariable int userId) throws FilmNotFoundException, UserNotFoundException {
         return filmService.deleteLike(id, userId);
     }
 
-    @GetMapping("/films/popular")
-    public List<Film> popularFilms(@RequestParam (defaultValue = "10", required = false) String count){
+    @GetMapping("/popular")
+    public List<Film> popularFilms(@RequestParam (defaultValue = "10", required = false) Integer count){
         return filmService.popularFilms(count);
     }
 
-    @GetMapping("/films/{id}")
-    public Film searchFilmById(@PathVariable int id) throws FilmNotFoundException{
+    @GetMapping("/{id}")
+    public Film getFilmById(@PathVariable int id) throws FilmNotFoundException{
         return filmService.searchFilmById(id);
     }
 

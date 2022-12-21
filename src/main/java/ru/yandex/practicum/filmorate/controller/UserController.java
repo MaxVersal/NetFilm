@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.Set;
 
 @RestController
-@RequestMapping
+@RequestMapping("/users")
 @Slf4j
 public class UserController {
     private final UserService userService;
@@ -22,44 +22,44 @@ public class UserController {
         this.userService = userService;
     }
 
-    @GetMapping("/users")
+    @GetMapping
     public List< User> getUsers() {
         return userService.getAllUsers();
     }
 
-    @PostMapping("/users")
+    @PostMapping
     public User addUser(@RequestBody User user) throws ValidationException {
        return userService.addUser(user);
     }
 
-    @PutMapping("/users")
+    @PutMapping
     public User updateUser(@RequestBody User user) throws ValidationException {
         return userService.updateUser(user);
     }
 
-    @PutMapping("/users/{id}/friends/{friendId}")
-    public User addFriend(@PathVariable("id") int id, @PathVariable("friendId") int friendId) throws UserNotFoundException {
+    @PutMapping("/{id}/friends/{friendId}")
+    public String addFriend(@PathVariable("id") int id, @PathVariable("friendId") int friendId) throws UserNotFoundException {
         return userService.addFriend(id,friendId);
     }
 
-    @DeleteMapping("/users/{id}/friends/{friendId}")
-    public User deleteFriend (@PathVariable("id") int id, @PathVariable("friendId") int friendId) throws UserNotFoundException {
+    @DeleteMapping("/{id}/friends/{friendId}")
+    public String deleteFriend (@PathVariable("id") int id, @PathVariable("friendId") int friendId) throws UserNotFoundException {
         return userService.deleteFriend(id, friendId);
     }
 
-    @GetMapping("/users/{id}/friends")
-    public Set<User> allFriends(@PathVariable("id") int id) throws UserNotFoundException {
+    @GetMapping("/{id}/friends")
+    public List<User> allFriends(@PathVariable("id") int id) throws UserNotFoundException {
         return userService.getFriends(id);
     }
 
-    @GetMapping ("/users/{id}/friends/common/{otherId}")
+    @GetMapping ("/{id}/friends/common/{otherId}")
     public Set<User> commonFriends(@PathVariable("id") int id, @PathVariable("otherId") int otherId) throws UserNotFoundException {
-        return userService.findGeneralFriends(id, otherId);
+        return userService.getCommonFriends(id, otherId);
     }
 
-    @GetMapping("/users/{id}")
-    public User searchUser(@PathVariable("id") int id) throws UserNotFoundException {
-        return userService.searchUserById(id);
+    @GetMapping("/{id}")
+    public User getUserById(@PathVariable("id") int id) throws UserNotFoundException {
+        return userService.getUserById(id);
     }
 
 }

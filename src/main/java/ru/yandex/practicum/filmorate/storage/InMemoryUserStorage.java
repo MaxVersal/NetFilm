@@ -26,6 +26,34 @@ public class InMemoryUserStorage  implements UserStorage {
 
     @Override
     public User addUser(User user) throws ValidationException {
+        validate(user);
+        user.setId(newId++);
+        users.put(user.getId(), user);
+        return user;
+    }
+
+    @Override
+    public User updateUser(User user) throws ValidationException, UserNotFoundException {
+        if (users.containsKey(user.getId())) {
+           validate(user);
+           log.debug("Обновлен пользователь: {}", user);
+           users.put(user.getId(), user);
+        } else {
+            throw new UserNotFoundException("Пользователя с указанным ID не существует");
+        }
+        return user;
+    }
+
+    @Override
+    public User getUserById(int id) throws UserNotFoundException {
+        User user = users.get(id);
+        if (user == null)
+            throw new UserNotFoundException("Пользователя с указанным ID не существует");
+
+        return user;
+    }
+
+    private void validate(User user) throws ValidationException {
         if (user.getEmail().isEmpty() || user.getEmail().isBlank() || !user.getEmail().contains("@")) {
             throw new ValidationException("Неправильный email пользователя");
         } else if (user.getLogin().contains(" ") || user.getLogin().isEmpty()) {
@@ -35,39 +63,6 @@ public class InMemoryUserStorage  implements UserStorage {
         }
         if (user.getName().equals("")) {
             user.setName(user.getLogin());
-        }
-        user.setId(newId++);
-        users.put(user.getId(), user);
-        return user;
-    }
-
-    @Override
-    public User updateUser(User user) throws ValidationException, UserNotFoundException {
-        if (users.containsKey(user.getId())) {
-            if (user.getEmail().isEmpty() || user.getEmail().isBlank() || !user.getEmail().contains("@")) {
-                throw new ValidationException("Неправильный email пользователя");
-            } else if (user.getLogin().contains(" ") || user.getLogin().isEmpty()) {
-                throw new ValidationException("Неправильное имя пользователя");
-            } else if (user.getBirthday().isAfter(LocalDate.now())) {
-                throw new ValidationException("Неправильно указана дата рождения");
-            }
-            if (user.getName().equals("")) {
-                user.setName(user.getLogin());
-            }
-            log.debug("Обновлен пользователь: {}", user);
-            users.put(user.getId(), user);
-        } else {
-            throw new UserNotFoundException("Пользователя с указанным ID не существует");
-        }
-        return user;
-    }
-
-    @Override
-    public User getUserById(int id) throws UserNotFoundException {
-        if (users.containsKey(id)) {
-            return users.get(id);
-        } else {
-            throw new UserNotFoundException("Пользователя с указанным ID не существует");
         }
     }
 }

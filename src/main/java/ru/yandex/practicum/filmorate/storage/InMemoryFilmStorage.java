@@ -25,15 +25,7 @@ public class InMemoryFilmStorage implements FilmStorage{
 
     @Override
     public Film addFilm(Film film) throws ValidationException {
-        if (film.getName().isEmpty()) {
-            throw new ValidationException("Имя фильма не может быть пустым");
-        } else if (film.getDescription().length() > 200) {
-            throw new ValidationException("Описание не может быть длиннее 200 символов");
-        } else if (film.getReleaseDate().isBefore(LocalDate.of(1895, 1, 28))) {
-            throw new ValidationException("Некорректная дата фильма");
-        } else if (film.getDuration() < 0) {
-            throw new ValidationException("Неккоректная длительность фильма");
-        }
+        validate(film);
         film.setId(newId++);
         films.put(film.getId(), film);
         log.debug("Добавлен фильм: {}", film);
@@ -43,16 +35,8 @@ public class InMemoryFilmStorage implements FilmStorage{
     @Override
     public Film updateFilm(Film film) throws ValidationException {
         if (films.containsKey(film.getId())) {
-            if (film.getName().isEmpty()) {
-                throw new ValidationException("Имя фильма не может быть пустым");
-            } else if (film.getDescription().length() > 200) {
-                throw new ValidationException("Описание не может быть длиннее 200 символов");
-            } else if (film.getReleaseDate().isBefore(LocalDate.of(1895, 1, 28))) {
-                throw new ValidationException("Некорректная дата фильма");
-            } else if (film.getDuration() < 0) {
-                throw new ValidationException("Неккоректная длительность фильма");
-            }
-                films.put(film.getId(), film);
+            validate(film);
+            films.put(film.getId(), film);
         } else {
             throw new FilmNotFoundException("Не найден указанный фильм");
         }
@@ -62,10 +46,23 @@ public class InMemoryFilmStorage implements FilmStorage{
 
     @Override
     public Film findFilmById(int id) throws FilmNotFoundException {
-        if (films.containsKey(id)) {
-            return films.get(id);
-        } else {
+        Film film = films.get(id);
+        if (film == null) {
             throw new FilmNotFoundException("Фильма с указанным id не существует");
+        }
+        return film;
+    }
+
+
+    private void validate(Film film) throws ValidationException {
+        if (film.getName().isEmpty()) {
+            throw new ValidationException("Имя фильма не может быть пустым");
+        } else if (film.getDescription().length() > 200) {
+            throw new ValidationException("Описание не может быть длиннее 200 символов");
+        } else if (film.getReleaseDate().isBefore(LocalDate.of(1895, 1, 28))) {
+            throw new ValidationException("Некорректная дата фильма");
+        } else if (film.getDuration() < 0) {
+            throw new ValidationException("Неккоректная длительность фильма");
         }
     }
 }
