@@ -53,13 +53,13 @@ public class UserService {
                 .collect(Collectors.toList());
     }
 
-    public Set<User> getCommonFriends(int mainId, int otherId) throws UserNotFoundException {
+    public List<User> getCommonFriends(int mainId, int otherId) throws UserNotFoundException {
         Set<Integer> common = new HashSet<>(userStorage.getUserById(mainId).getFriends());
-        common.retainAll(userStorage.getUserById(otherId).getFriends());
         return common.stream()
+                .filter(userStorage.getUserById(otherId).getFriends() :: contains)
                 .map(userID -> userStorage.getUserById(userID))
                 .sorted(Comparator.comparing(User::getId))
-                .collect(Collectors.toCollection(LinkedHashSet::new));
+                .collect(Collectors.toList());
     }
 
     public User addUser(User user) throws ValidationException {
