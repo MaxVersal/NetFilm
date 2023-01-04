@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d41a8fb2-f8d5-4c56-8bc5-21a5152bf453" name="Changes" comment="sql database" />
+    <list default="true" id="d41a8fb2-f8d5-4c56-8bc5-21a5152bf453" name="Changes" comment="sql database with examples" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -184,7 +184,14 @@
       <option name="project" value="LOCAL" />
       <updated>1672837597058</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="sql database with examples">
+      <created>1672844630850</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1672844630850</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -204,6 +211,7 @@
     <MESSAGE value="methods renaming + second iteration" />
     <MESSAGE value="Replacing sets with lists" />
     <MESSAGE value="sql database" />
-    <option name="LAST_COMMIT_MESSAGE" value="sql database" />
+    <MESSAGE value="sql database with examples" />
+    <option name="LAST_COMMIT_MESSAGE" value="sql database with examples" />
   </component>
 </project>

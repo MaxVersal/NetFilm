@@ -16,5 +16,5 @@ https://app.quickdatabasediagrams.com/#/d/2V5iw3
 SELECT f.friendID
 FROM friends as f
 JOIN User AS u ON f.userID = u.userID
-WHERE f.is_confirmed = 'true'
+WHERE f.is_confirmed = 1
 GROUP BY f.friendID
