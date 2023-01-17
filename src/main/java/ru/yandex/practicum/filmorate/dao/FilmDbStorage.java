@@ -19,8 +19,6 @@ import ru.yandex.practicum.filmorate.service.MpaService;
 import ru.yandex.practicum.filmorate.service.ValidationService;
 import ru.yandex.practicum.filmorate.storage.FilmStorage;
 
-import javax.print.DocFlavor;
-import java.lang.reflect.InvocationTargetException;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.util.*;
