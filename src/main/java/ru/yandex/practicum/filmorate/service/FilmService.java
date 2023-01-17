@@ -28,11 +28,21 @@ public class FilmService {
 
     private final JdbcTemplate jdbcTemplate;
 
+    private final MpaService mpaService;
+
+    private final GenreService genreService;
+
     @Autowired
-    public FilmService(FilmDbStorage filmStorage, UserDbStorage userStorage,JdbcTemplate jdbcTemplate) {
+    public FilmService(FilmDbStorage filmStorage,
+                       UserDbStorage userStorage,
+                       JdbcTemplate jdbcTemplate,
+                       MpaService mpaService,
+                       GenreService genreService) {
         this.filmStorage = filmStorage;
         this.userStorage = userStorage;
         this.jdbcTemplate = jdbcTemplate;
+        this.mpaService = mpaService;
+        this.genreService = genreService;
     }
 
     public Film addLike(int filmId, int userId) throws FilmNotFoundException, UserNotFoundException, ValidationException {
@@ -41,6 +51,7 @@ public class FilmService {
     }
 
     public Film deleteLike(int filmId, int userId) throws FilmNotFoundException, UserNotFoundException, ValidationException {
+        userStorage.getUserById(userId);
         jdbcTemplate.update("delete from FILM_LIKES where USER_ID = ? and film_id = ?", userId, filmId);
         return filmStorage.findFilmById(filmId);
     }
@@ -50,10 +61,18 @@ public class FilmService {
         return new HashSet<>(likes);
     }
 
-    public List<Film> popularFilms(Integer count) {
-        List<Film> pop =  jdbcTemplate.query("select * from FILM where id in (select id from film_likes order by COUNT(user_id) desc limit(?))",
+    public List<Film> popularFilms(Integer count) throws ValidationException {
+        List<Film> pop =  jdbcTemplate.query("SELECT * FROM FILM WHERE id IN (SELECT film_id FROM FILM_LIKES GROUP BY film_id ORDER BY count(user_id)) LIMIT (?)",
                 new Object[]{count}, new BeanPropertyRowMapper<>(Film.class));
-        return pop;
+        if (pop.isEmpty()) {
+            return getAllFilms();
+        } else {
+            for (Film film : pop) {
+                film.setMpa(mpaService.getRatingById(film.getMpa().getId()));
+            }
+            return pop;
+        }
+
     }
 
     public Film addFilm(Film film) throws ValidationException {

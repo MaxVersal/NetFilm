@@ -49,10 +49,13 @@ public class FilmDbStorage implements FilmStorage {
         String sql = "select * from film";
         List<Film> films = jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(Film.class));
         for (Film film : films) {
-            Set<Integer> genres = new HashSet<>(genreService.findGenresByFilmId(film.getId()));
+            Set<Genre> genres = new HashSet<>(genreService.findGenresByFilmId(film.getId()));
             Set<Genre> genresForCurrentFilm = new TreeSet<>(Comparator.comparingInt(Genre::getId));
-            for (Integer genreId : genres) {
-                genresForCurrentFilm.add(genreService.findGenreById(genreId));
+            for (Genre genre: genres) {
+                genre.setName(jdbcTemplate.queryForObject("select name from genre where id = ?",
+                        new Object[]{genre.getId()},
+                        String.class));
+                genresForCurrentFilm.add(genre);
             }
             film.setGenres(genresForCurrentFilm);
             Mpa mpa = new Mpa(film.getMpa().getId(),jdbcTemplate.queryForObject("select name from mpa where rating_id in (select mpa from film where id = ?)", new Object[]{film.getId()}, String.class));
@@ -103,11 +106,12 @@ public class FilmDbStorage implements FilmStorage {
         SqlRowSet filmRows = jdbcTemplate.queryForRowSet("select * from film where id = ?", film.getId());
         KeyHolder keyHolder = new GeneratedKeyHolder();
         if (filmRows.next()) {
+            jdbcTemplate.update(" delete from film_genre where film_id = ?", film.getId());
             film.getMpa().setName(jdbcTemplate.queryForObject("select name from mpa where rating_id = ?",
                     new Object[]{film.getMpa().getId()}, String.class));
             Set<Genre> genres = new TreeSet<>(Comparator.comparingInt(Genre::getId));
             Set<Genre> genresForFilm = film.getGenres();
-            if (genresForFilm != null){
+            if (!genresForFilm.isEmpty()){
                 for (Genre genre : genresForFilm) {
                     String name = jdbcTemplate.queryForObject("select name from genre where id = ?",
                             new Object[]{genre.getId()},
@@ -117,6 +121,8 @@ public class FilmDbStorage implements FilmStorage {
                     jdbcTemplate.update("insert into film_genre(film_id, genre_id) values(?,?)", film.getId(), genre.getId());
                 }
                 film.setGenres(genres);
+            } else {
+                jdbcTemplate.update(" delete from film_genre where film_id = ?", film.getId());
             }
             String sqlquery = "update film set id = ?, name = ?, description = ?, release_date = ?, duration = ?, mpa = ?" +
                     "where id = ?";
@@ -159,7 +165,15 @@ public class FilmDbStorage implements FilmStorage {
                     mpa
             );
             film.setId(id);
-
+            Set<Genre> genres = new HashSet<>(genreService.findGenresByFilmId(film.getId()));
+            Set<Genre> genresForCurrentFilm = new TreeSet<>(Comparator.comparingInt(Genre::getId));
+            for (Genre genre: genres) {
+                genre.setName(jdbcTemplate.queryForObject("select name from genre where id = ?",
+                        new Object[]{genre.getId()},
+                        String.class));
+                genresForCurrentFilm.add(genre);
+            }
+            film.setGenres(genresForCurrentFilm);
             log.info("Найден фильм с id: {}", film.getId());
             return film;
         } else {

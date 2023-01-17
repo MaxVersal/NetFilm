@@ -32,9 +32,9 @@ public class GenreService {
         }
     }
 
-    public List<Integer> findGenresByFilmId(int id) {
-        return jdbcTemplate.queryForList("select id from genre where id in (select genre_id from film_genre where film_id = ?)",
-                Integer.class,
-                new Object[]{id});
+    public List<Genre> findGenresByFilmId(int id) {
+        return jdbcTemplate.query("select id from genre where id in (select genre_id from film_genre where film_id = ?)",
+                new Object[]{id},
+                new BeanPropertyRowMapper<>(Genre.class));
     }
 }

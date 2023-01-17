@@ -50,7 +50,7 @@ public class FilmController {
     }
 
     @GetMapping("/popular")
-    public List<Film> popularFilms(@RequestParam (defaultValue = "10", required = false) Integer count){
+    public List<Film> popularFilms(@RequestParam (defaultValue = "10", required = false) Integer count) throws ValidationException {
         return filmService.popularFilms(count);
     }
 
