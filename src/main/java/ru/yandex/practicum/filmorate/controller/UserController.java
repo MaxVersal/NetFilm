@@ -38,7 +38,7 @@ public class UserController {
     }
 
     @PutMapping("/{id}/friends/{friendId}")
-    public String addFriend(@PathVariable("id") int id, @PathVariable("friendId") int friendId) throws UserNotFoundException {
+    public String addFriend(@PathVariable("id") int id, @PathVariable("friendId") int friendId) throws UserNotFoundException, ValidationException {
         return userService.addFriend(id,friendId);
     }
 
@@ -58,7 +58,7 @@ public class UserController {
     }
 
     @GetMapping("/{id}")
-    public User getUserById(@PathVariable("id") int id) throws UserNotFoundException {
+    public User getUserById(@PathVariable("id") int id) throws UserNotFoundException, ValidationException {
         return userService.getUserById(id);
     }
 

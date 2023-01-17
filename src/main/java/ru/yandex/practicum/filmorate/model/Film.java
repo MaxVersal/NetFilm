@@ -6,13 +6,18 @@ import lombok.experimental.FieldDefaults;
 
 import java.time.LocalDate;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
+import java.util.TreeSet;
 
 @Data
 @RequiredArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
+@AllArgsConstructor
+@Builder
+@NoArgsConstructor
 public class Film {
-    @NonNull
+
     int id;
 
     @NonNull
@@ -28,5 +33,9 @@ public class Film {
     @NonNull
     int duration;
 
-    Set<Integer> likes = new HashSet<>();
+
+    @NonNull
+    Mpa mpa;
+
+    Set<Genre> genres = new HashSet<>();
 }

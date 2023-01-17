@@ -5,6 +5,7 @@ import org.springframework.stereotype.Component;
 import ru.yandex.practicum.filmorate.exceptions.UserNotFoundException;
 import ru.yandex.practicum.filmorate.exceptions.ValidationException;
 import ru.yandex.practicum.filmorate.model.User;
+import ru.yandex.practicum.filmorate.service.ValidationService;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -19,6 +20,8 @@ public class InMemoryUserStorage  implements UserStorage {
     private final Map<Integer, User> users = new HashMap<>();
     private int newId = 1;
 
+    private final ValidationService validate = new ValidationService();
+
     @Override
     public List<User> getUsers() {
         return new ArrayList<>(users.values());
@@ -26,7 +29,7 @@ public class InMemoryUserStorage  implements UserStorage {
 
     @Override
     public User addUser(User user) throws ValidationException {
-        validate(user);
+        validate.validateUser(user);
         user.setId(newId++);
         users.put(user.getId(), user);
         return user;
@@ -35,7 +38,7 @@ public class InMemoryUserStorage  implements UserStorage {
     @Override
     public User updateUser(User user) throws ValidationException, UserNotFoundException {
         if (users.containsKey(user.getId())) {
-           validate(user);
+            validate.validateUser(user);
            log.debug("Обновлен пользователь: {}", user);
            users.put(user.getId(), user);
         } else {
@@ -51,18 +54,5 @@ public class InMemoryUserStorage  implements UserStorage {
             throw new UserNotFoundException("Пользователя с указанным ID не существует");
 
         return user;
-    }
-
-    private void validate(User user) throws ValidationException {
-        if (user.getEmail().isEmpty() || user.getEmail().isBlank() || !user.getEmail().contains("@")) {
-            throw new ValidationException("Неправильный email пользователя");
-        } else if (user.getLogin().contains(" ") || user.getLogin().isEmpty()) {
-            throw new ValidationException("Неправильное имя пользователя");
-        } else if (user.getBirthday().isAfter(LocalDate.now())) {
-            throw new ValidationException("Неправильно указана дата рождения");
-        }
-        if (user.getName().equals("")) {
-            user.setName(user.getLogin());
-        }
     }
 }

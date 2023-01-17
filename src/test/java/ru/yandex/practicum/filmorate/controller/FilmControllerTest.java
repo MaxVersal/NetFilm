@@ -34,7 +34,8 @@ class FilmControllerTest {
                 "  \"name\": \"nisi eiusmod\",\n" +
                 "  \"description\": \"adipisicing\",\n" +
                 "  \"releaseDate\": \"1967-03-25\",\n" +
-                "  \"duration\": 100\n" +
+                "  \"duration\": 100,\n" +
+                "  \"mpa\": { \"id\": 1}\n" +
                 "}";
     }
 
@@ -77,7 +78,8 @@ class FilmControllerTest {
                                 "  \"releaseDate\": \"1989-04-17\",\n" +
                                 "  \"description\": \"New film update decription\",\n" +
                                 "  \"duration\": 190,\n" +
-                                "  \"rate\": 4\n" +
+                                "  \"rate\": 4,\n" +
+                                "  \"mpa\": { \"id\": 2}\n" +
                                 "}"))
                 .andDo(print())
                 .andExpect(status().isOk());

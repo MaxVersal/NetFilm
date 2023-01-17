@@ -10,6 +10,9 @@ import java.util.Set;
 @Data
 @RequiredArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
+@NoArgsConstructor
+@Builder
+@AllArgsConstructor
 public class User {
     @NonNull
     int id;
