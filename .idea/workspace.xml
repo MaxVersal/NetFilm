@@ -4,36 +4,20 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d41a8fb2-f8d5-4c56-8bc5-21a5152bf453" name="Changes" comment="film_genre and many-to-many refactoring + codestyle">
-      <change afterPath="$PROJECT_DIR$/src/main/java/ru/yandex/practicum/filmorate/dao/FriendsDao.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/ru/yandex/practicum/filmorate/dao/GenreStorage.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/ru/yandex/practicum/filmorate/dao/LikesDao.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/ru/yandex/practicum/filmorate/dao/MpaStorage.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/ru/yandex/practicum/filmorate/dao/impl/FriendsDaoStorage.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/ru/yandex/practicum/filmorate/dao/impl/GenreDbStorage.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/ru/yandex/practicum/filmorate/dao/impl/LikesDaoStorage.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/ru/yandex/practicum/filmorate/dao/impl/MpaDbStorage.java" afterDir="false" />
+    <list default="true" id="d41a8fb2-f8d5-4c56-8bc5-21a5152bf453" name="Changes" comment="Genre storage, mpa storage + refactoring update method">
+      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/db/filmorate.mv.db" beforeDir="false" afterPath="$PROJECT_DIR$/db/filmorate.mv.db" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/db/filmorate.trace.db" beforeDir="false" afterPath="$PROJECT_DIR$/db/filmorate.trace.db" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ru/yandex/practicum/filmorate/dao/FilmDbStorage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/yandex/practicum/filmorate/dao/impl/FilmDbStorage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ru/yandex/practicum/filmorate/dao/UserDbStorage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/yandex/practicum/filmorate/dao/impl/UserDbStorage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ru/yandex/practicum/filmorate/service/FilmService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/yandex/practicum/filmorate/service/FilmService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ru/yandex/practicum/filmorate/service/GenreService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/yandex/practicum/filmorate/service/GenreService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ru/yandex/practicum/filmorate/service/MpaService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/yandex/practicum/filmorate/service/MpaService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ru/yandex/practicum/filmorate/service/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/yandex/practicum/filmorate/service/UserService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ru/yandex/practicum/filmorate/service/ValidationService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/yandex/practicum/filmorate/service/ValidationService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/ru/yandex/practicum/filmorate/controller/UserController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/ru/yandex/practicum/filmorate/controller/UserController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/ru/yandex/practicum/filmorate/dao/FilmDbStorage.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/ru/yandex/practicum/filmorate/dao/UserDbStorage.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/ru/yandex/practicum/filmorate/model/Film$FilmBuilder.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/ru/yandex/practicum/filmorate/model/Film$FilmBuilder.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/ru/yandex/practicum/filmorate/model/Film.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/ru/yandex/practicum/filmorate/model/Film.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/ru/yandex/practicum/filmorate/service/FilmService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/ru/yandex/practicum/filmorate/service/FilmService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/ru/yandex/practicum/filmorate/service/GenreService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/ru/yandex/practicum/filmorate/service/GenreService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/ru/yandex/practicum/filmorate/service/MpaService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/ru/yandex/practicum/filmorate/service/MpaService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/ru/yandex/practicum/filmorate/service/UserService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/ru/yandex/practicum/filmorate/service/UserService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/ru/yandex/practicum/filmorate/service/ValidationService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/ru/yandex/practicum/filmorate/service/ValidationService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/classpath.index" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/filmorate-0.0.1-SNAPSHOT.jar" beforeDir="false" afterPath="$PROJECT_DIR$/target/filmorate-0.0.1-SNAPSHOT.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/filmorate-0.0.1-SNAPSHOT.jar.original" beforeDir="false" afterPath="$PROJECT_DIR$/target/filmorate-0.0.1-SNAPSHOT.jar.original" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/surefire-reports/TEST-ru.yandex.practicum.filmorate.controller.FilmControllerTest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/surefire-reports/TEST-ru.yandex.practicum.filmorate.controller.FilmControllerTest.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/surefire-reports/TEST-ru.yandex.practicum.filmorate.controller.UserControllerTest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/surefire-reports/TEST-ru.yandex.practicum.filmorate.controller.UserControllerTest.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/surefire-reports/ru.yandex.practicum.filmorate.controller.FilmControllerTest.txt" beforeDir="false" afterPath="$PROJECT_DIR$/target/surefire-reports/ru.yandex.practicum.filmorate.controller.FilmControllerTest.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/surefire-reports/ru.yandex.practicum.filmorate.controller.UserControllerTest.txt" beforeDir="false" afterPath="$PROJECT_DIR$/target/surefire-reports/ru.yandex.practicum.filmorate.controller.UserControllerTest.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/test-classes/ru/yandex/practicum/filmorate/controller/UserControllerTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/ru/yandex/practicum/filmorate/controller/UserControllerTest.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -299,7 +283,14 @@
       <option name="project" value="LOCAL" />
       <updated>1673962033504</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="Genre storage, mpa storage + refactoring update method">
+      <created>1674058993806</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1674058993806</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -327,7 +318,8 @@
     <MESSAGE value="database functional adding" />
     <MESSAGE value="film_genre and many-to-many refactoring" />
     <MESSAGE value="film_genre and many-to-many refactoring + codestyle" />
-    <option name="LAST_COMMIT_MESSAGE" value="film_genre and many-to-many refactoring + codestyle" />
+    <MESSAGE value="Genre storage, mpa storage + refactoring update method" />
+    <option name="LAST_COMMIT_MESSAGE" value="Genre storage, mpa storage + refactoring update method" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
