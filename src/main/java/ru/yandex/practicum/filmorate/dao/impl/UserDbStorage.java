@@ -1,4 +1,4 @@
-package ru.yandex.practicum.filmorate.dao;
+package ru.yandex.practicum.filmorate.dao.impl;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -39,7 +39,6 @@ public class UserDbStorage implements UserStorage {
     @Override
     public User addUser(User user) throws ValidationException {
         KeyHolder keyHolder = new GeneratedKeyHolder();
-        validate.validateUser(user);
         String sqlQuery = "insert into users(email,login,name,birthday) values (?, ?, ?, ?)";
         jdbcTemplate.update(connection -> {
             PreparedStatement ps =connection.prepareStatement(sqlQuery, new String[]{"id"});
@@ -57,20 +56,16 @@ public class UserDbStorage implements UserStorage {
 
     @Override
     public User updateUser(User user) throws ValidationException {
-        validate.validateUser(user);
-        SqlRowSet filmRows = jdbcTemplate.queryForRowSet("select * from users where id = ?", user.getId());
-        if(filmRows.next()) {
-            String sqlQuery = "update users set email = ?, login = ?, name = ?, birthday = ? where id = ?";
-            jdbcTemplate.update(sqlQuery,
-                    user.getEmail(),
-                    user.getLogin(),
-                    user.getName(),
-                    Date.valueOf(user.getBirthday()),
-                    user.getId());
+        int rows = jdbcTemplate.update("update users set email = ?, login = ?, name = ?, birthday = ? where id = ?",  user.getEmail(),
+                user.getLogin(),
+                user.getName(),
+                Date.valueOf(user.getBirthday()),
+                user.getId());
+        if (rows != 0) {
             log.info("Обновлен пользователь с id: {}", user.getId());
             return user;
         } else {
-            throw new UserNotFoundException("Пользователь с указанным id не найден");
+            throw new UserNotFoundException("Пользователь с данным id не найден");
         }
     }
 

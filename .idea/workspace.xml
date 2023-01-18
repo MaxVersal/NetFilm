@@ -4,21 +4,36 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d41a8fb2-f8d5-4c56-8bc5-21a5152bf453" name="Changes" comment="database functional adding">
+    <list default="true" id="d41a8fb2-f8d5-4c56-8bc5-21a5152bf453" name="Changes" comment="film_genre and many-to-many refactoring + codestyle">
+      <change afterPath="$PROJECT_DIR$/src/main/java/ru/yandex/practicum/filmorate/dao/FriendsDao.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/ru/yandex/practicum/filmorate/dao/GenreStorage.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/ru/yandex/practicum/filmorate/dao/LikesDao.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/ru/yandex/practicum/filmorate/dao/MpaStorage.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/ru/yandex/practicum/filmorate/dao/impl/FriendsDaoStorage.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/ru/yandex/practicum/filmorate/dao/impl/GenreDbStorage.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/ru/yandex/practicum/filmorate/dao/impl/LikesDaoStorage.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/ru/yandex/practicum/filmorate/dao/impl/MpaDbStorage.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/db/filmorate.mv.db" beforeDir="false" afterPath="$PROJECT_DIR$/db/filmorate.mv.db" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/db/filmorate.trace.db" beforeDir="false" afterPath="$PROJECT_DIR$/db/filmorate.trace.db" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ru/yandex/practicum/filmorate/controller/FilmController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/yandex/practicum/filmorate/controller/FilmController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ru/yandex/practicum/filmorate/dao/FilmDbStorage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/yandex/practicum/filmorate/dao/FilmDbStorage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/yandex/practicum/filmorate/dao/FilmDbStorage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/yandex/practicum/filmorate/dao/impl/FilmDbStorage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/yandex/practicum/filmorate/dao/UserDbStorage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/yandex/practicum/filmorate/dao/impl/UserDbStorage.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/ru/yandex/practicum/filmorate/service/FilmService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/yandex/practicum/filmorate/service/FilmService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/ru/yandex/practicum/filmorate/service/GenreService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/yandex/practicum/filmorate/service/GenreService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/data.sql" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/data.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/classpath.index" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/data.sql" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/data.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/ru/yandex/practicum/filmorate/controller/FilmController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/ru/yandex/practicum/filmorate/controller/FilmController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/ru/yandex/practicum/filmorate/dao/FilmDbStorage.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/ru/yandex/practicum/filmorate/dao/FilmDbStorage.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/yandex/practicum/filmorate/service/MpaService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/yandex/practicum/filmorate/service/MpaService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/yandex/practicum/filmorate/service/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/yandex/practicum/filmorate/service/UserService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/yandex/practicum/filmorate/service/ValidationService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/yandex/practicum/filmorate/service/ValidationService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/ru/yandex/practicum/filmorate/controller/UserController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/ru/yandex/practicum/filmorate/controller/UserController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/ru/yandex/practicum/filmorate/dao/FilmDbStorage.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/ru/yandex/practicum/filmorate/dao/UserDbStorage.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/ru/yandex/practicum/filmorate/model/Film$FilmBuilder.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/ru/yandex/practicum/filmorate/model/Film$FilmBuilder.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/ru/yandex/practicum/filmorate/model/Film.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/ru/yandex/practicum/filmorate/model/Film.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/ru/yandex/practicum/filmorate/service/FilmService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/ru/yandex/practicum/filmorate/service/FilmService.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/ru/yandex/practicum/filmorate/service/GenreService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/ru/yandex/practicum/filmorate/service/GenreService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/ru/yandex/practicum/filmorate/service/MpaService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/ru/yandex/practicum/filmorate/service/MpaService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/ru/yandex/practicum/filmorate/service/UserService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/ru/yandex/practicum/filmorate/service/UserService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/ru/yandex/practicum/filmorate/service/ValidationService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/ru/yandex/practicum/filmorate/service/ValidationService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/test-classes/classpath.index" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -35,6 +50,12 @@
     </option>
   </component>
   <component name="Git.Settings">
+    <option name="PUSH_TAGS">
+      <GitPushTagMode>
+        <option name="argument" value="--follow-tags" />
+        <option name="title" value="Current Branch" />
+      </GitPushTagMode>
+    </option>
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
         <entry key="$PROJECT_DIR$" value="add-database" />
@@ -264,7 +285,21 @@
       <option name="project" value="LOCAL" />
       <updated>1673920434516</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="film_genre and many-to-many refactoring">
+      <created>1673961933723</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1673961933723</updated>
+    </task>
+    <task id="LOCAL-00010" summary="film_genre and many-to-many refactoring + codestyle">
+      <created>1673962033504</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1673962033504</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -290,7 +325,9 @@
     <MESSAGE value="sql database with examples" />
     <MESSAGE value="sql database with examples refactoring" />
     <MESSAGE value="database functional adding" />
-    <option name="LAST_COMMIT_MESSAGE" value="database functional adding" />
+    <MESSAGE value="film_genre and many-to-many refactoring" />
+    <MESSAGE value="film_genre and many-to-many refactoring + codestyle" />
+    <option name="LAST_COMMIT_MESSAGE" value="film_genre and many-to-many refactoring + codestyle" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -309,13 +346,8 @@
           <option name="timeStamp" value="17" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/ru/yandex/practicum/filmorate/service/FilmService.java</url>
-          <line>64</line>
-          <option name="timeStamp" value="20" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/ru/yandex/practicum/filmorate/dao/FilmDbStorage.java</url>
-          <line>68</line>
+          <url>file://$PROJECT_DIR$/src/main/java/ru/yandex/practicum/filmorate/dao/impl/FilmDbStorage.java</url>
+          <line>66</line>
           <option name="timeStamp" value="25" />
         </line-breakpoint>
       </breakpoints>
