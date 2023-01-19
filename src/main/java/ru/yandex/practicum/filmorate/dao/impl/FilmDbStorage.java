@@ -15,8 +15,6 @@ import ru.yandex.practicum.filmorate.model.Film;
 import ru.yandex.practicum.filmorate.model.Genre;
 import ru.yandex.practicum.filmorate.model.Mpa;
 import ru.yandex.practicum.filmorate.service.GenreService;
-import ru.yandex.practicum.filmorate.service.MpaService;
-import ru.yandex.practicum.filmorate.service.ValidationService;
 import ru.yandex.practicum.filmorate.storage.FilmStorage;
 
 import java.sql.Date;
@@ -30,16 +28,12 @@ public class FilmDbStorage implements FilmStorage {
 
     private final JdbcTemplate jdbcTemplate;
 
-    private final ValidationService validate = new ValidationService();
-
     private final GenreService genreService;
 
-    private final MpaService mpaService;
 
-    public FilmDbStorage(JdbcTemplate jdbcTemplate, GenreService genreService, MpaService mpaService) {
+    public FilmDbStorage(JdbcTemplate jdbcTemplate, GenreService genreService) {
         this.jdbcTemplate = jdbcTemplate;
         this.genreService = genreService;
-        this.mpaService = mpaService;
     }
 
     @Override
@@ -65,7 +59,6 @@ public class FilmDbStorage implements FilmStorage {
     @Override
     public Film addFilm(Film film) throws ValidationException {
         KeyHolder keyHolder = new GeneratedKeyHolder();
-        validate.validateFilm(film);
         film.getMpa().setName(jdbcTemplate.queryForObject("select name from mpa where rating_id = ?",
                 new Object[]{film.getMpa().getId()}, String.class));
         Set<Genre> genres = new TreeSet<>(Comparator.comparingInt(Genre::getId));
@@ -100,7 +93,6 @@ public class FilmDbStorage implements FilmStorage {
 
     @Override
     public Film updateFilm(Film film) throws ValidationException {
-        validate.validateFilm(film);
         SqlRowSet filmRows = jdbcTemplate.queryForRowSet("select * from film where id = ?", film.getId());
         KeyHolder keyHolder = new GeneratedKeyHolder();
         if (filmRows.next()) {

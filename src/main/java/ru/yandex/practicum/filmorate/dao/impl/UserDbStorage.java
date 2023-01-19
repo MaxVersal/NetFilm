@@ -11,7 +11,6 @@ import org.springframework.stereotype.Component;
 import ru.yandex.practicum.filmorate.exceptions.UserNotFoundException;
 import ru.yandex.practicum.filmorate.exceptions.ValidationException;
 import ru.yandex.practicum.filmorate.model.User;
-import ru.yandex.practicum.filmorate.service.ValidationService;
 import ru.yandex.practicum.filmorate.storage.UserStorage;
 
 import java.sql.Date;
@@ -25,7 +24,6 @@ public class UserDbStorage implements UserStorage {
 
     private final JdbcTemplate jdbcTemplate;
 
-    private final ValidationService validate = new ValidationService();
 
     public UserDbStorage(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
