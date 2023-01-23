@@ -1,6 +1,11 @@
 ru\yandex\practicum\filmorate\model\User.class
+ru\yandex\practicum\filmorate\model\Film.class
+ru\yandex\practicum\filmorate\service\GenreService.class
+ru\yandex\practicum\filmorate\FilmorateApplication.class
+ru\yandex\practicum\filmorate\controller\GenreController.class
+ru\yandex\practicum\filmorate\controller\FilmController.class
+ru\yandex\practicum\filmorate\model\Mpa.class
+ru\yandex\practicum\filmorate\service\MpaService.class
 ru\yandex\practicum\filmorate\exceptions\ValidationException.class
 ru\yandex\practicum\filmorate\controller\UserController.class
-ru\yandex\practicum\filmorate\controller\FilmController.class
-ru\yandex\practicum\filmorate\FilmorateApplication.class
-ru\yandex\practicum\filmorate\model\Film.class
+ru\yandex\practicum\filmorate\model\Genre.class

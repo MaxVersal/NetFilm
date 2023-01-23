@@ -25,7 +25,7 @@ public class FilmController {
     }
 
     @GetMapping
-    public List<Film> getFilms() {
+    public List<Film> getFilms() throws ValidationException {
         return filmService.getAllFilms();
     }
 
@@ -40,22 +40,22 @@ public class FilmController {
     }
 
     @PutMapping("/{id}/like/{userId}")
-    public Film addLike(@PathVariable int id,@PathVariable int userId) throws FilmNotFoundException, UserNotFoundException {
+    public Film addLike(@PathVariable int id,@PathVariable int userId) throws FilmNotFoundException, UserNotFoundException, ValidationException {
         return filmService.addLike(id, userId);
     }
 
     @DeleteMapping("/{id}/like/{userId}")
-    public Film deleteLike(@PathVariable int id, @PathVariable int userId) throws FilmNotFoundException, UserNotFoundException {
+    public Film deleteLike(@PathVariable int id, @PathVariable int userId) throws FilmNotFoundException, UserNotFoundException, ValidationException {
         return filmService.deleteLike(id, userId);
     }
 
     @GetMapping("/popular")
-    public List<Film> popularFilms(@RequestParam (defaultValue = "10", required = false) Integer count){
+    public List<Film> popularFilms(@RequestParam (defaultValue = "10", required = false) Integer count) throws ValidationException {
         return filmService.popularFilms(count);
     }
 
     @GetMapping("/{id}")
-    public Film getFilmById(@PathVariable int id) throws FilmNotFoundException{
+    public Film getFilmById(@PathVariable int id) throws FilmNotFoundException, ValidationException {
         return filmService.searchFilmById(id);
     }
 

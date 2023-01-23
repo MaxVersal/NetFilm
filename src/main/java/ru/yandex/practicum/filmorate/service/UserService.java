@@ -1,72 +1,61 @@
 package ru.yandex.practicum.filmorate.service;
 
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
+import ru.yandex.practicum.filmorate.dao.FriendsDao;
+import ru.yandex.practicum.filmorate.dao.impl.UserDbStorage;
 import ru.yandex.practicum.filmorate.exceptions.UserNotFoundException;
 import ru.yandex.practicum.filmorate.exceptions.ValidationException;
 import ru.yandex.practicum.filmorate.model.User;
-import ru.yandex.practicum.filmorate.storage.InMemoryUserStorage;
+import ru.yandex.practicum.filmorate.storage.UserStorage;
 
-import java.util.*;
-import java.util.stream.Collectors;
+import java.util.List;
 
 @Service
 @Slf4j
 public class UserService {
+    @Qualifier ("UserDbStorage")
+    private final UserStorage userStorage;
 
-    private final InMemoryUserStorage userStorage;
+    private final FriendsDao friendsStorage;
 
-    public UserService(InMemoryUserStorage userStorage) {
+    private final ValidationService validationService;
+
+
+    public UserService(FriendsDao friendsStorage,
+                       @Qualifier("UserDbStorage") UserStorage userStorage,
+                       ValidationService validationService) {
+        this.friendsStorage = friendsStorage;
         this.userStorage = userStorage;
+        this.validationService=validationService;
     }
 
-    public String addFriend(int mainUserId, int addedUserId) throws UserNotFoundException {
-        userStorage
-                .getUserById(mainUserId)
-                .getFriends()
-                .add(userStorage.getUserById(addedUserId).getId());
-        userStorage
-                .getUserById(addedUserId)
-                .getFriends()
-                .add(userStorage.getUserById(mainUserId).getId());
-        return String.format("Пользователь %s и %s теперь друзья", userStorage.getUserById(mainUserId).getName(),
-                                                                    userStorage.getUserById(addedUserId).getName());
-
+    public String addFriend(int mainUserId, int addedUserId) throws UserNotFoundException, ValidationException {
+        return friendsStorage.addFriend(mainUserId, addedUserId);
     }
 
     public String deleteFriend(int mainUserID, int deletedUserId) throws UserNotFoundException {
-        userStorage.getUserById(mainUserID)
-                .getFriends()
-                .remove(deletedUserId);
-        userStorage.getUserById(deletedUserId)
-                .getFriends()
-                .remove(mainUserID);
-        return String.format("Пользователи %s и %s больше не друзья", userStorage.getUserById(mainUserID).getName(),
-                                                                        userStorage.getUserById(deletedUserId).getName());
+        return friendsStorage.deleteFriends(mainUserID,deletedUserId);
     }
 
     public List<User> getFriends(int mainUserId) throws UserNotFoundException {
-        Set<Integer> friends = userStorage.getUserById(mainUserId).getFriends();
-        return friends.stream()
-                .map(userId -> userStorage.getUserById(userId))
-                .sorted(Comparator.comparing(User::getId))
-                .collect(Collectors.toList());
+        return friendsStorage.getFriends(mainUserId);
     }
 
     public List<User> getCommonFriends(int mainId, int otherId) throws UserNotFoundException {
-        Set<Integer> common = new HashSet<>(userStorage.getUserById(mainId).getFriends());
-        return common.stream()
-                .filter(userStorage.getUserById(otherId).getFriends() :: contains)
-                .map(userID -> userStorage.getUserById(userID))
-                .sorted(Comparator.comparing(User::getId))
-                .collect(Collectors.toList());
+        return friendsStorage.getCommonFriends(mainId,otherId);
     }
 
     public User addUser(User user) throws ValidationException {
+        validationService.validateUser(user);
         return userStorage.addUser(user);
     }
 
     public User updateUser(User user) throws ValidationException {
+        validationService.validateUser(user);
         return userStorage.updateUser(user);
     }
 
@@ -74,7 +63,7 @@ public class UserService {
         return userStorage.getUsers();
     }
 
-    public User getUserById(int id) throws UserNotFoundException {
+    public User getUserById(int id) throws UserNotFoundException, ValidationException {
         return userStorage.getUserById(id);
     }
 }

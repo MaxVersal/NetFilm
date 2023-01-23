@@ -5,6 +5,7 @@ import org.springframework.stereotype.Component;
 import ru.yandex.practicum.filmorate.exceptions.FilmNotFoundException;
 import ru.yandex.practicum.filmorate.exceptions.ValidationException;
 import ru.yandex.practicum.filmorate.model.Film;
+import ru.yandex.practicum.filmorate.service.ValidationService;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -18,6 +19,8 @@ public class InMemoryFilmStorage implements FilmStorage{
     private Map<Integer, Film> films = new HashMap<>();
     private int newId = 1;
 
+    private final ValidationService validate = new ValidationService();
+
     @Override
     public List<Film> getFilms() {
         return new ArrayList<>(films.values());
@@ -25,7 +28,7 @@ public class InMemoryFilmStorage implements FilmStorage{
 
     @Override
     public Film addFilm(Film film) throws ValidationException {
-        validate(film);
+        validate.validateFilm(film);
         film.setId(newId++);
         films.put(film.getId(), film);
         log.debug("Добавлен фильм: {}", film);
@@ -35,7 +38,7 @@ public class InMemoryFilmStorage implements FilmStorage{
     @Override
     public Film updateFilm(Film film) throws ValidationException {
         if (films.containsKey(film.getId())) {
-            validate(film);
+            validate.validateFilm(film);
             films.put(film.getId(), film);
         } else {
             throw new FilmNotFoundException("Не найден указанный фильм");
@@ -53,16 +56,4 @@ public class InMemoryFilmStorage implements FilmStorage{
         return film;
     }
 
-
-    private void validate(Film film) throws ValidationException {
-        if (film.getName().isEmpty()) {
-            throw new ValidationException("Имя фильма не может быть пустым");
-        } else if (film.getDescription().length() > 200) {
-            throw new ValidationException("Описание не может быть длиннее 200 символов");
-        } else if (film.getReleaseDate().isBefore(LocalDate.of(1895, 1, 28))) {
-            throw new ValidationException("Некорректная дата фильма");
-        } else if (film.getDuration() < 0) {
-            throw new ValidationException("Неккоректная длительность фильма");
-        }
-    }
 }
